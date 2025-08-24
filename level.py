@@ -18,8 +18,4 @@ class Level:
         #-------------------------------------------------------------------------------------------------------------------
         keys = pygame.key.get_pressed()
         
-
-        #pygame.mixer.Sound.play(self.music)
-        #pygame.mixer.music.stop()
-        
         self.display.fill((100,22,22,255))

@@ -1,0 +1,57 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Starting Room",
+      "size": { "width": 32, "height": 32 }, 
+      "tileset": "stone",
+      "exits": [
+        { "direction": "north", "x": 16, "y": 0 },
+        { "direction": "east", "x": 31, "y": 16 }
+      ],
+      "enemies": [],
+      "items": [
+        { "type": "health_potion", "x": 8, "y": 8 }
+      ],
+      "features": [
+        { "type": "torch", "x": 4, "y": 4 },
+        { "type": "chest", "x": 28, "y": 28, "locked": false }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Hallway",
+      "size": { "width": 48, "height": 16 }, 
+      "tileset": "brick",
+      "exits": [
+        { "direction": "west", "x": 0, "y": 8 },
+        { "direction": "east", "x": 47, "y": 8 }
+      ],
+      "enemies": [
+        { "type": "slime", "hp": 10, "x": 20, "y": 8 },
+        { "type": "slime", "hp": 10, "x": 30, "y": 8 }
+      ],
+      "items": [],
+      "features": []
+    },
+    {
+      "id": 3,
+      "name": "Treasure Room",
+      "size": { "width": 64, "height": 64 },
+      "tileset": "marble",
+      "exits": [
+        { "direction": "south", "x": 32, "y": 63 }
+      ],
+      "enemies": [
+        { "type": "skeleton", "hp": 20, "x": 40, "y": 40, "weapon": "sword" }
+      ],
+      "items": [
+        { "type": "gold", "amount": 100, "x": 32, "y": 32 }
+      ],
+      "features": [
+        { "type": "trap", "x": 20, "y": 20, "damage": 10 },
+        { "type": "chest", "x": 50, "y": 50, "locked": true, "key_required": true }
+      ]
+    }
+  ]
+}
