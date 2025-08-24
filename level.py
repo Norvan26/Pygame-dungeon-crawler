@@ -17,7 +17,7 @@ class Level:
         self.pos = pygame.mouse.get_pos()
         #-------------------------------------------------------------------------------------------------------------------
         keys = pygame.key.get_pressed()
-
+        
 
         #pygame.mixer.Sound.play(self.music)
         #pygame.mixer.music.stop()
