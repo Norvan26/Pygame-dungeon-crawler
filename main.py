@@ -3,6 +3,8 @@ import sys
 import random
 import math
 from level import *
+from components.button import Button
+
 #
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 736
@@ -48,6 +50,9 @@ class Start:
     def run(self):
         self.display.fill('white')
         pygame.draw.rect(self.display, (255,0,0), pygame.Rect(30, 30, 60, 60))
+        self.btn = Button(500, 100, 540, 300, pygame.image.load('assets/button.png'), self.display)
+        if self.btn.run() and pygame.mouse.get_pressed()[0]:
+            print('clicked')
 
 
 class GameStateManager:
