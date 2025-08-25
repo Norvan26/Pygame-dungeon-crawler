@@ -4,7 +4,7 @@ import random
 import math
 from level import *
 from components.button import Button
-from components.playerGui import Gui
+
 
 #
 SCREEN_WIDTH = 1280
@@ -24,7 +24,7 @@ class Game:
         self.gameStateManager = GameStateManager('start')
         self.level = Level(self.screen)
 
-        self.start = Start(self.screen)
+        self.start = Start(self.screen, self.gameStateManager)
 
         self.states = {'start': self.start, 'level': self.level}
 
@@ -45,18 +45,16 @@ class Game:
 
 
 class Start:
-    def __init__(self, display):
+    def __init__(self, display, gamestatemanager):
         self.display = display
-        self.gui = Gui(self.display)
-
+        self.gamestatemanager = gamestatemanager
 
     def run(self):
         self.display.fill('white')
         pygame.draw.rect(self.display, (255,0,0), pygame.Rect(30, 30, 60, 60))
-        self.btn = Button(500, 100, 540, 300, pygame.image.load('assets/button.png'), self.display)
-        self.gui.run()
+        self.btn = Button(200, 100, 340, 380, pygame.image.load('assets/play.png'), self.display)
         if self.btn.run() and pygame.mouse.get_pressed()[0]:
-            print('clicked')
+            self.gamestatemanager.setState('level')
 
 
 class GameStateManager:
