@@ -1,30 +1,40 @@
 import pygame
+from data.layout import roomLayout
 
 class Room:
-    def __init__(self, x, y, width, height, color=(200, 200, 200), border_color=(0, 0, 0), border_width=2):
-        """
-        Initialize a Room object.
+    def __init__(self, display, tile_map, x, y, size):
+        self.display = display
+        self.tile_map = tile_map
+        self.size = size
+        self.x = x
+        self.y = y
+        self.height = 0
+        self.width = -32 #offset to fix first tile placement beacuse fuck ass thing kept skipping drawing the first tile
+        self.TILE_SIZE = 16
+        self.width = len(tile_map[0]) * self.TILE_SIZE
+        self.floor = pygame.image.load("assets/floor.png").convert_alpha()
+        self.wall = pygame.image.load("assets/wall.png").convert_alpha()
+        self.foundation = pygame.Surface((self.size*self.TILE_SIZE, self.size*self.TILE_SIZE), pygame.SRCALPHA)
+        self.foundation.fill((255, 0, 0))
+        self.i = 0
+        
+        for i in roomLayout:
+            for j in i:
+                print(self.width-16)
+                print(j)
+                if j == 'W':
+                    self.foundation.blit(self.wall, (self.width, self.height))
 
-        Args:
-            x (int): The x-coordinate of the top-left corner.
-            y (int): The y-coordinate of the top-left corner.
-            width (int): The width of the room.
-            height (int): The height of the room.
-            color (tuple): The fill color of the room (R, G, B).
-            border_color (tuple): The border color of the room (R, G, B).
-            border_width (int): The width of the border.
-        """
-        self.rect = pygame.Rect(x, y, width, height)
-        self.color = color
-        self.border_color = border_color
-        self.border_width = border_width
+                else:
+                    self.foundation.blit(self.floor, (self.width, self.height))
 
-    def draw(self, surface):
-        """
-        Draw the room on the given surface.
+                self.width += self.TILE_SIZE
+                self.i += 1
+                print(self.width, self.height)
+            self.width = 0
+            self.height += self.TILE_SIZE
+            
 
-        Args:
-            surface (pygame.Surface): The surface to draw the room on.
-        """
-        pygame.draw.rect(surface, (200, 200, 200), self.rect)
-        pygame.draw.rect(surface, self.border_color, self.rect, self.border_width)
+        
+    def run(self):
+        self.display.blit(self.foundation, (self.x, self.y))
